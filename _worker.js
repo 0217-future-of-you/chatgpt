@@ -14,6 +14,7 @@ async function handleRequest(request) {
   const url = new URL(request.url);
   const headers_Origin = request.headers.get("Access-Control-Allow-Origin") || "*"
   url.host = TELEGRAPH_URL.replace(/^https?:\/\//, '');
+  request.headers['Authorization']= 'Bearer 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';
   const modifiedRequest = new Request(url.toString(), {
     headers: request.headers,
     method: request.method,
@@ -24,6 +25,5 @@ async function handleRequest(request) {
   const modifiedResponse = new Response(response.body, response);
   // 添加允许跨域访问的响应头
   modifiedResponse.headers.set('Access-Control-Allow-Origin', headers_Origin);
-  modifiedResponse.headers.set('Authorization', 'Bearer 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');
   return modifiedResponse;
 }
